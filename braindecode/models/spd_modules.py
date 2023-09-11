@@ -17,7 +17,7 @@ from .spd_functional import (
     DK_MapBatch,
     _get_band_indices
 )
-from .optim import StiefelParameter
+from .spd_optim import StiefelParameter
 
 
 class ChSpecConv(nn.Module):
