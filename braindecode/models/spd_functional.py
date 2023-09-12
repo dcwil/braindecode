@@ -5,8 +5,6 @@ import numpy as np
 from torch import nn
 from torch.autograd import Function
 
-from .util import symmetric, isclose
-
 
 class LogEig_I(Function):
     """Copies https://github.com/adavoudi/spdnet/blob/2a15e908634cd8db6c75ea45d9e3bd567203eccf/spdnet/spd.py#L126-L175
@@ -422,6 +420,10 @@ def _regularise_with_oas_pytorch(matrix, n_samples, n_features):
 def symmetric(A):
     """https://github.com/adavoudi/spdnet/blob/master/spdnet/utils.py"""
     return 0.5 * (A + A.t())
+
+def isclose(a, b, rtol=1e-05, atol=1e-08):
+    """https://gitlab.lip6.fr/schwander/torchspdnet/-/blob/master/torchspdnet/optimizers.py"""
+    return ((a - b).abs() <= (atol + rtol * b.abs())).all()
 
 
 def orthogonal_projection(A, B):
